@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeenPay — Payment Infrastructure for the Next Generation</title>
+<meta name="description" content="Discover TeenPay, an upcoming payment technology platform designed to make online payments, checkout pages and payment automation more accessible to young entrepreneurs.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website"><meta property="og:title" content="TeenPay — Payment Infrastructure for the Next Generation">
+<meta property="og:description" content="An upcoming payment technology platform for young entrepreneurs.">
+<meta property="og:url" content="https://example.com/"><meta property="og:image" content="https://example.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="TeenPay — Payment Infrastructure for the Next Generation">
+<meta name="twitter:description" content="An upcoming payment technology platform for young entrepreneurs.">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJUZWVuUGF5Ij48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI4IiBmaWxsPSIjMjU2M0VCIi8+PHBhdGggZD0iTTkgMjFsNy0xMCA3IDEwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNTUiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMjEiIHI9IjMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMSIgcj0iMyIgZmlsbD0iI2ZmZiIvPjwvc3ZnPgo=" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+<style>
+:root{--blue:#2563EB;--navy:#101828;--navy2:#172554;--bg:#F8FAFC;--w:#fff;--tx:#101828;--tx2:#667085;--bd:#E4E7EC;--ok:#12B76A;--r:14px;--s2:16px;--s3:24px;--s4:40px;--s5:72px;--sh:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06)}
+* { -webkit-tap-highlight-color: transparent; }
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--tx);background:var(--w);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+h1,h2,h3{line-height:1.15;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(2rem,8vw,3.6rem);font-weight:800}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+.narrow{max-width:680px}.center{text-align:center}
+.muted{color:var(--tx2);font-size:.9rem}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:10px;font:600 .95rem Inter,sans-serif;border:1px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:none}
+.btn-l{min-height:50px;padding:0 26px;font-size:1rem}
+.btn-p{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3)}.btn-p:hover{background:#1D4ED8}
+.btn-s{background:#fff;border-color:var(--bd);color:var(--tx)}.btn-s:hover{box-shadow:var(--sh)}
+.btn-w{background:#fff;color:var(--navy2)}
+.btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.nav{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
+.nav.scrolled{background:rgba(255,255,255,.95);border-color:var(--bd)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.menu{position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--bd);display:flex;flex-direction:column;padding:12px 20px 20px;gap:4px;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
+.menu.open{max-height:480px;opacity:1;visibility:visible}
+.menu a:not(.btn){padding:12px 4px;color:var(--tx2);font-weight:500}.menu a:not(.btn):hover{color:var(--blue)}
+.nav-cta{display:none}
+.burger{background:none;border:0;width:44px;height:44px;display:grid;place-content:center;gap:5px;cursor:pointer}
+.burger span{width:22px;height:2px;background:var(--navy);transition:.2s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded=true] span:nth-child(2){opacity:0}
+.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hero{margin-top:-68px;padding:120px 0 var(--s5);background:radial-gradient(900px 400px at 85% 0,#DBEAFE 0,transparent 70%),var(--bg)}
+.hero-grid{display:grid;gap:var(--s4)}
+.badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--blue);background:#EFF6FF;border:1px solid #BFDBFE;padding:6px 12px;border-radius:8px;margin-bottom:var(--s2)}
+.hl{color:var(--blue)}
+.lead{font-size:1.1rem;color:var(--tx2);margin:var(--s2) 0 var(--s3);max-width:560px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:var(--s2)}
+.trust{list-style:none;padding:0;margin:var(--s3) 0 0;display:grid;gap:8px;color:var(--tx2);font-size:.9rem}
+.trust li,.ticks li{display:flex;gap:8px;align-items:center}.trust .i{color:var(--ok);width:18px}
+.mock{position:relative;padding-bottom:70px}
+.m-main,.m-card,.code{background:#fff;border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}
+.m-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid var(--bd);font-size:.75rem;color:var(--tx2)}
+.m-bar i{width:9px;height:9px;border-radius:50%;background:var(--bd)}.m-bar span{margin-left:8px}
+.m-row{display:flex;justify-content:space-between;align-items:center;padding:18px 16px 8px}
+.m-row small,.m-card small,.m-chart small{display:block;color:var(--tx2);font-size:.75rem}
+.m-row strong{font-size:1.8rem;letter-spacing:-.02em}
+.pill{background:#ECFDF3;color:#027A48;font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:8px}
+.m-chart{padding:8px 16px 14px}.m-chart svg{width:100%;height:80px;display:block}
+.line{stroke-dasharray:400;stroke-dashoffset:400;animation:draw 2s .4s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.m-card{position:absolute;display:flex;gap:12px;align-items:center;padding:12px 14px;font-size:.85rem;animation:float 6s ease-in-out infinite}
+.m-qr{left:0;bottom:0}.m-hook{right:0;bottom:24px;animation-delay:-3s}.m-hook .i{color:var(--blue)}
+@keyframes float{50%{transform:translateY(-6px)}}
+.sec{padding:var(--s5) 0}.alt{background:var(--bg)}
+.head{max-width:680px;margin:0 auto var(--s4);text-align:center}.head p{color:var(--tx2);margin-top:var(--s2)}
+.head .note{font-size:.9rem;font-weight:500;color:var(--blue)}
+.grid{display:grid;gap:var(--s3)}
+.card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:var(--s3);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.card p{color:var(--tx2);margin-top:8px;font-size:.95rem}
+.ic{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:#EFF6FF;color:var(--blue);margin-bottom:var(--s2)}
+.intro{background:linear-gradient(135deg,var(--navy2),var(--blue));color:#fff}
+.intro .head p{color:#DBEAFE}.intro .center{margin-top:var(--s4)}
+.card.dark{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}.card.dark .ic{background:rgba(255,255,255,.15);color:#fff}
+.steps{list-style:none;margin:0;padding:0 0 0 8px;display:grid;gap:var(--s3);position:relative}
+.steps::before{content:"";position:absolute;left:23px;top:20px;bottom:20px;width:2px;background:var(--bd)}
+.steps li{position:relative;padding-left:56px}
+.steps p{color:var(--tx2);font-size:.95rem;margin-top:4px}
+.num{position:absolute;left:0;top:0;width:32px;height:32px;display:grid;place-items:center;background:var(--blue);color:#fff;border-radius:50%;font-weight:700;font-size:.9rem;box-shadow:0 0 0 6px var(--bg)}
+.dev{background:var(--navy);color:#fff}
+.dev-grid{display:grid;gap:var(--s4);align-items:center}
+.dev p{color:#98A2B3;margin-top:var(--s2)}
+.ticks{list-style:none;padding:0;margin:var(--s3) 0 0;display:grid;gap:12px}.ticks .i{color:var(--ok)}
+.code{background:#0B1220;border-color:#1D2939;overflow:hidden}.code .m-bar{border-color:#1D2939;color:#98A2B3}.code .m-bar i{background:#344054}
+pre{margin:0;padding:18px;overflow-x:auto;font:.85rem/1.7 ui-monospace,Menlo,Consolas,monospace;color:#D0D5DD}pre b{color:#60A5FA}
+.wl{background:linear-gradient(180deg,#EFF6FF,var(--bg))}
+.form{display:grid;gap:8px;padding:var(--s3);box-shadow:var(--sh)}.form:hover{transform:none}
+label,legend{font-weight:600;font-size:.9rem;margin-top:8px}label small{font-weight:400;color:var(--tx2)}.req{color:#D92D20}
+input[type=email],input[type=text],select,textarea{width:100%;font:inherit;font-size:1rem;padding:12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--tx);transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px #DBEAFE}
+.invalid{border-color:#D92D20!important}
+fieldset{border:0;padding:0;margin:8px 0 0;display:grid;gap:4px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.9rem;color:var(--tx2);margin-top:6px}.chk input{margin-top:4px;width:18px;height:18px;accent-color:var(--blue);flex:none}
+.err{color:#D92D20;font-size:.85rem}
+.status{font-size:.95rem;font-weight:500;text-align:center}.status.ok{color:#027A48}.status.bad{color:#D92D20}
+.faq{display:grid;gap:12px}
+details{background:#fff;border:1px solid var(--bd);border-radius:var(--r);transition:box-shadow .2s}details[open]{box-shadow:var(--sh)}
+summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:600;display:flex;justify-content:space-between;gap:12px;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--blue);font-size:1.4rem;line-height:1;transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg)}
+details>div p{padding:0 20px 18px;color:var(--tx2);animation:open .3s}
+@keyframes open{from{opacity:0;transform:translateY(-6px)}}
+.final{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+.final p{color:#BFDBFE;margin:var(--s2) auto var(--s3);max-width:520px}.final h2{max-width:720px;margin:0 auto}
+.foot{background:var(--navy);color:#98A2B3;padding:var(--s4) 0;font-size:.9rem}
+.foot .brand{color:#fff}.foot-top{display:grid;gap:var(--s3);padding-bottom:var(--s3);border-bottom:1px solid #1D2939}
+.foot-top p{margin-top:8px;max-width:340px}.foot nav{display:grid;gap:8px}.foot nav a:hover{color:#fff}
+.disc{margin-top:var(--s2);font-size:.82rem}
+.js .fade{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.js .fade.in{opacity:1;transform:none}
+@media(min-width:640px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.foot nav{grid-template-columns:repeat(2,auto)}}
+@media(min-width:900px){
+.menu{position:absolute;left:50%;transform:translateX(-50%);top:auto;flex-direction:row;align-items:center;padding:0;border:0;max-height:none;opacity:1;visibility:visible;overflow:visible;background:none;gap:28px;width:auto}
+.menu-cta,.burger{display:none}.nav-cta{display:inline-flex}.menu a:not(.btn){padding:0;font-size:.92rem}
+.hero-grid{grid-template-columns:1.05fr 1fr;align-items:center}
+.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.steps{grid-template-columns:repeat(4,1fr);padding:0;gap:var(--s3)}.steps::before{left:16px;right:16px;top:15px;bottom:auto;width:auto;height:2px}
+.steps li{padding:56px 0 0}
+.dev-grid{grid-template-columns:1fr 1fr}
+.foot-top{grid-template-columns:1fr auto}.form{padding:var(--s4)}}
+@media(max-width:380px){.m-card{position:static;margin-top:12px;animation:none}.mock{padding-bottom:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.js .fade{opacity:1;transform:none}.line{stroke-dashoffset:0}}
+
+:root{--cyan:#06B6D4;--grad:linear-gradient(135deg,#2563EB 0%,#0EA5E9 60%,#06B6D4 100%)}
+body{font-family:Inter,system-ui,sans-serif}
+h1,h2,h3,.brand,.kpis strong,.badge,.btn{font-family:Manrope,Inter,sans-serif}
+h1{letter-spacing:-.035em;line-height:1.08}
+.hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shine 6s ease-in-out infinite alternate}
+@keyframes shine{to{background-position:100% 0}}
+.brand{background:linear-gradient(90deg,#101828,#2563EB);-webkit-background-clip:text;background-clip:text;color:transparent}
+.foot .brand{background:linear-gradient(90deg,#fff,#93C5FD);-webkit-background-clip:text;background-clip:text}
+.brand img{border-radius:9px;box-shadow:0 4px 12px rgba(37,99,235,.35)}
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#F5F9FF,#EEF4FF 60%,#fff)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0;animation:drift 14s ease-in-out infinite alternate}
+.hero::before{width:420px;height:420px;background:#BFDBFE;top:-120px;right:-60px}
+.hero::after{width:320px;height:320px;background:#A5F3FC;bottom:-100px;left:-80px;animation-delay:-6s}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.12)}}
+.hero-grid{position:relative;z-index:1}
+.btn-p{background:var(--grad);position:relative;overflow:hidden;box-shadow:0 8px 22px rgba(37,99,235,.35)}
+.btn-p:hover{background:var(--grad);box-shadow:0 12px 28px rgba(37,99,235,.45)}
+.btn-p::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
+.btn-p:hover::after{transform:translateX(120%)}
+.badge{background:#fff;border-color:#DBEAFE;box-shadow:0 2px 10px rgba(37,99,235,.12)}
+.mock{perspective:1200px}
+.dash{display:flex;background:#fff;border:1px solid var(--bd);border-radius:18px;box-shadow:0 30px 60px -20px rgba(23,37,84,.35),0 0 0 6px rgba(255,255,255,.6);overflow:hidden;transform:rotateY(-6deg) rotateX(3deg);transition:transform .6s;animation:rise .9s both}
+.dash:hover{transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(28px) rotateY(-6deg) rotateX(3deg)}}
+.d-side{width:52px;background:linear-gradient(180deg,#172554,#101828);display:flex;flex-direction:column;align-items:center;gap:14px;padding:14px 0}
+.d-logo{width:26px;height:26px;border-radius:8px;background:var(--grad)}
+.d-side i{width:20px;height:20px;border-radius:6px;background:rgba(255,255,255,.14)}.d-side i.on{background:rgba(96,165,250,.55)}
+.d-body{flex:1;min-width:0}
+.m-bar{justify-content:space-between}.m-bar span{margin:0;font-weight:600;color:var(--tx)}
+.demo{font-style:normal;font-size:.62rem;font-weight:700;letter-spacing:.08em;color:#B54708;background:#FFFAEB;border:1px solid #FEDF89;padding:3px 7px;border-radius:6px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 14px 6px}
+.kpis div{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:10px}
+.kpis small{display:block;font-size:.66rem;color:var(--tx2)}.kpis strong{font-size:1.15rem;letter-spacing:-.02em}
+.d-chart{display:flex;align-items:flex-end;gap:7px;height:84px;padding:12px 14px 0}
+.d-chart b{flex:1;height:var(--h);border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#38BDF8,#2563EB);transform-origin:bottom;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+.d-chart b:nth-child(2){animation-delay:.08s}.d-chart b:nth-child(3){animation-delay:.16s}.d-chart b:nth-child(4){animation-delay:.24s}.d-chart b:nth-child(5){animation-delay:.32s}.d-chart b:nth-child(6){animation-delay:.4s}.d-chart b:nth-child(7){animation-delay:.48s;background:linear-gradient(180deg,#34D399,#12B76A)}
+@keyframes grow{from{transform:scaleY(0)}}
+.txs{list-style:none;margin:0;padding:10px 14px 14px;display:grid;gap:8px}
+.txs li{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;font-size:.8rem;animation:slide .5s both}
+.txs li div{flex:1;min-width:0}.txs small{display:block;color:var(--tx2);font-size:.68rem}
+.txs strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.av{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#EFF6FF;color:var(--blue);font-weight:700;font-size:.75rem}
+.pill.wait{background:#FFFAEB;color:#B54708}
+@keyframes slide{from{opacity:0;transform:translateY(-10px)}}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(18,183,106,.5);animation:ping 1.8s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px rgba(18,183,106,0)}}
+.m-card{backdrop-filter:blur(6px)}
+.ic{background:linear-gradient(135deg,#EFF6FF,#E0F2FE)}
+.card:hover{border-color:#BFDBFE}
+.intro{background:radial-gradient(600px 300px at 10% 0,rgba(6,182,212,.35),transparent),linear-gradient(135deg,#101828,#172554 55%,#2563EB)}
+.num{background:var(--grad)}
+.final{background:radial-gradient(500px 260px at 80% 0,rgba(37,99,235,.5),transparent),linear-gradient(135deg,#101828,#172554)}
+@media(max-width:380px){.kpis strong{font-size:.95rem}.d-side{width:40px}}
+@media(prefers-reduced-motion:reduce){.dash{transform:none}.hero::before,.hero::after{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l4-4 4 4 5-6"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v7M14 20h3"/></symbol>
+<symbol id="i-page" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M6 8h12v3a6 6 0 01-12 0zM12 17v5"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2L3 6v14h18V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+</defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+<div class="wrap nav-in">
+<a class="brand" href="#home" aria-label="TeenPay home"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJUZWVuUGF5Ij48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI4IiBmaWxsPSIjMjU2M0VCIi8+PHBhdGggZD0iTTkgMjFsNy0xMCA3IDEwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNTUiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMjEiIHI9IjMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMSIgcj0iMyIgZmlsbD0iI2ZmZiIvPjwvc3ZnPgo=" alt="" width="32" height="32">TeenPay</a>
+<nav id="menu" class="menu" aria-label="Primary">
+<a href="#home">Home</a><a href="#why">Why TeenPay</a><a href="#features">Features</a><a href="#how">How It Works</a><a href="#faq">FAQ</a>
+<a class="btn btn-p menu-cta" href="#waitlist">Join Waitlist</a>
+</nav>
+<a class="btn btn-p nav-cta" href="#waitlist">Join Waitlist</a>
+<button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+</div>
+</header>
+
+<main id="main">
+<section class="hero" id="home">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<p class="badge">BUILDING THE FUTURE OF YOUNG ENTREPRENEURSHIP</p>
+<h1>Your ambition deserves better <span class="hl">payment infrastructure.</span></h1>
+<p class="lead">Starting a business is difficult enough. TeenPay is being built to make online payments, checkout pages and payment automation more accessible to the next generation of entrepreneurs.</p>
+<div class="cta-row"><a class="btn btn-p btn-l" href="#waitlist">Get Early Access</a><a class="btn btn-s btn-l" href="#features">Explore the Platform</a></div>
+<p class="muted">Be among the first to experience TeenPay.</p>
+<ul class="trust"><li><svg class="i"><use href="#i-check"/></svg>Transparent about what’s still in development</li><li><svg class="i"><use href="#i-check"/></svg>No payment or sensitive data required to join</li></ul>
+</div>
+<div class="mock" aria-label="Illustrative product preview with demo data only">
+<div class="dash">
+<div class="d-side" aria-hidden="true"><span class="d-logo"></span><i class="on"></i><i></i><i></i><i></i></div>
+<div class="d-body">
+<div class="m-bar"><span>TeenPay Dashboard</span><em class="demo">DEMO DATA</em></div>
+<div class="kpis">
+<div><small>Sample sales</small><strong data-count="499" data-prefix="₹">₹0</strong></div>
+<div><small>Payments</small><strong data-count="12">0</strong></div>
+<div><small>Verified</small><strong data-count="100" data-suffix="%">0%</strong></div>
+</div>
+<div class="d-chart" aria-hidden="true"><b style="--h:35%"></b><b style="--h:52%"></b><b style="--h:44%"></b><b style="--h:68%"></b><b style="--h:58%"></b><b style="--h:82%"></b><b style="--h:100%"></b></div>
+<ul class="txs" id="txs">
+<li><span class="av">A</span><div><strong>Premium Product</strong><small>₹499 · sample</small></div><span class="pill">Paid — Demo</span></li>
+<li><span class="av">B</span><div><strong>Starter Pack</strong><small>₹199 · sample</small></div><span class="pill">Paid — Demo</span></li>
+<li><span class="av">C</span><div><strong>Course Access</strong><small>₹899 · sample</small></div><span class="pill">Paid — Demo</span></li>
+</ul>
+</div>
+</div>
+<div class="m-card m-qr"><svg viewBox="0 0 10 10" width="56" height="56" aria-label="Sample QR placeholder"><path fill="#101828" d="M0 0h3v3H0zM7 0h3v3H7zM0 7h3v3H0zM4 0h1v1H4zM4 2h2v1H4zM5 4h1v2H5zM7 5h1v1H7zM9 4h1v2H9zM4 7h2v1H4zM7 7h1v3H7zM9 8h1v2H9zM3 5h1v1H3z"/></svg><div><strong>UPI QR checkout</strong><small>Sample preview</small></div></div>
+<div class="m-card m-hook"><span class="dot"></span><div><strong>payment.verified</strong><small>Webhook · demo event</small></div></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="why">
+<div class="wrap">
+<div class="head"><h2>Great ideas shouldn’t get stuck at payments.</h2><p>Young entrepreneurs have ideas, products and customers. But accessing professional payment infrastructure can be another challenge.</p></div>
+<div class="grid g3">
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-lock"/></svg></span><h3>Limited access</h3><p>Finding suitable payment acceptance options can be difficult for young entrepreneurs.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-code"/></svg></span><h3>Technical complexity</h3><p>Integrating checkout, transaction verification and automated order processing can require significant technical effort.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-link"/></svg></span><h3>Disconnected workflows</h3><p>Managing payments, orders and customer notifications across different tools creates unnecessary complexity.</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec intro">
+<div class="wrap">
+<div class="head"><h2>Meet a simpler way to think about payments.</h2><p>TeenPay is being designed as a unified payment technology platform that brings checkout experiences, developer tools and payment automation together.</p></div>
+<div class="grid g3">
+<div class="card dark fade"><span class="ic"><svg class="i"><use href="#i-page"/></svg></span><h3>Simple payment experiences</h3></div>
+<div class="card dark fade"><span class="ic"><svg class="i"><use href="#i-code"/></svg></span><h3>Developer-friendly infrastructure</h3></div>
+<div class="card dark fade"><span class="ic"><svg class="i"><use href="#i-zap"/></svg></span><h3>Automated payment workflows</h3></div>
+</div>
+<p class="center"><a class="btn btn-w btn-l" href="#waitlist">Join the Early Access List</a></p>
+</div>
+</section>
+
+<section class="sec" id="features">
+<div class="wrap">
+<div class="head"><h2>Everything your payment workflow needs.</h2><p>Planned features — not yet available as operational services.</p></div>
+<div class="grid g3">
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-page"/></svg></span><h3>Hosted Payment Pages</h3><p>Create dedicated payment pages without building checkout infrastructure from scratch.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-qr"/></svg></span><h3>UPI QR Experiences</h3><p>Give customers a familiar QR-based payment experience through supported payment integrations.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-code"/></svg></span><h3>Developer APIs</h3><p>Connect payment workflows to your websites and applications.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-bell"/></svg></span><h3>Automated Webhooks</h3><p>Receive payment-status notifications to automate your order-processing workflow.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-chart"/></svg></span><h3>Transaction Dashboard</h3><p>Get a clear view of payment activity, transaction history and business performance.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-plug"/></svg></span><h3>Simple Integrations</h3><p>Build payment experiences into your existing products with developer-focused tools.</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec alt" id="how">
+<div class="wrap">
+<div class="head"><h2>From checkout to confirmation, simplified.</h2><p class="note">Illustrative planned workflow — subject to payment-provider integration.</p></div>
+<ol class="steps">
+<li class="fade"><span class="num">1</span><h3>Create a payment page</h3><p>Prepare a checkout experience for your product or service.</p></li>
+<li class="fade"><span class="num">2</span><h3>Customer makes a payment</h3><p>Customers use the supported payment method displayed at checkout.</p></li>
+<li class="fade"><span class="num">3</span><h3>Payment gets verified</h3><p>The payment provider confirms the transaction.</p></li>
+<li class="fade"><span class="num">4</span><h3>Your workflow gets automated</h3><p>Verified payment notifications trigger the merchant’s configured workflow.</p></li>
+</ol>
+</div>
+</section>
+
+<section class="sec dev">
+<div class="wrap dev-grid">
+<div><h2>Built for builders. Designed for businesses.</h2><p>Your payment infrastructure should work with your product, not against it.</p>
+<ul class="ticks"><li><svg class="i"><use href="#i-check"/></svg>Developer-friendly APIs</li><li><svg class="i"><use href="#i-check"/></svg>Configurable webhook workflows</li><li><svg class="i"><use href="#i-check"/></svg>Integration-focused architecture</li></ul></div>
+<div class="code fade"><div class="m-bar"><i></i><i></i><i></i><span>Conceptual example — not a working API</span></div>
+<pre><code><b>POST</b> /api/v1/payment-pages
+
+{
+  "amount": 499,
+  "currency": "INR",
+  "description": "Premium Product",
+  "webhook_url": "https://example.com/webhook"
+}</code></pre></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="wrap">
+<div class="head"><h2>Built for the next generation of entrepreneurs.</h2></div>
+<div class="grid g4">
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-box"/></svg></span><h3>Digital Product Creators</h3><p>Sell templates, courses and downloads.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-zap"/></svg></span><h3>SaaS Builders</h3><p>Add payments to your software product.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-bag"/></svg></span><h3>Online Store Owners</h3><p>Accept orders for physical or digital goods.</p></article>
+<article class="card fade"><span class="ic"><svg class="i"><use href="#i-user"/></svg></span><h3>Independent Developers</h3><p>Ship client and side projects with payments built in.</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec wl" id="waitlist">
+<div class="wrap narrow">
+<div class="head"><h2>Be part of what’s coming next.</h2><p>We’re building TeenPay with the next generation of entrepreneurs. Join our early-access community and help shape the product.</p></div>
+<form class="form card" id="waitlist-form" data-endpoint="https://qxbmerwxyjymqkuaefbb.supabase.co/functions/v1/teenpay-submit?type=waitlist" novalidate>
+<label for="w-email">Email address <span class="req">*</span></label>
+<input id="w-email" name="email" type="email" autocomplete="email" required aria-describedby="w-email-err">
+<p class="err" id="w-email-err" role="alert"></p>
+<label for="w-cat">Business category <small>(optional)</small></label>
+<select id="w-cat" name="category"><option value="">Select…</option><option>Digital products</option><option>SaaS / software</option><option>Online store</option><option>Freelance / services</option><option>Other</option></select>
+<label for="w-age">Age group <small>(optional)</small></label>
+<select id="w-age" name="age_group"><option value="">Select…</option><option>Under 18</option><option>18–24</option><option>25–34</option><option>35+</option></select>
+<label for="w-ch">Biggest payment challenge <small>(optional)</small></label>
+<textarea id="w-ch" name="challenge" rows="3" maxlength="500"></textarea>
+<label class="chk"><input type="checkbox" name="marketing_consent"><span>I agree to receive TeenPay product announcements and launch updates by email. I can unsubscribe at any time.</span></label>
+<button class="btn btn-p btn-l" type="submit"><span class="bt">Join the Waitlist</span></button>
+<p class="muted center">No payment required. No spam. Just meaningful updates.</p>
+<p class="status" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+
+<section class="sec" id="feedback">
+<div class="wrap narrow">
+<div class="head"><h2>Help us build something that actually matters.</h2><p>We want to understand the real challenges young entrepreneurs face when collecting online payments.</p></div>
+<form class="form card" id="feedback-form" data-endpoint="https://qxbmerwxyjymqkuaefbb.supabase.co/functions/v1/teenpay-submit?type=feedback" novalidate>
+<label for="f1">What type of business are you planning or operating?</label><input id="f1" name="business_type" type="text" maxlength="200">
+<label for="f2">What is your biggest payment-related challenge?</label><textarea id="f2" name="challenge" rows="3" maxlength="800"></textarea>
+<fieldset><legend>Which features would be most useful?</legend>
+<label class="chk"><input type="checkbox" name="features" value="Hosted payment pages"><span>Hosted payment pages</span></label>
+<label class="chk"><input type="checkbox" name="features" value="UPI QR"><span>UPI QR experiences</span></label>
+<label class="chk"><input type="checkbox" name="features" value="APIs"><span>Developer APIs</span></label>
+<label class="chk"><input type="checkbox" name="features" value="Webhooks"><span>Automated webhooks</span></label>
+<label class="chk"><input type="checkbox" name="features" value="Dashboard"><span>Transaction dashboard</span></label></fieldset>
+<label for="f4">What would make you trust a new payment platform?</label><textarea id="f4" name="trust" rows="3" maxlength="800"></textarea>
+<label for="f5">What is one thing you wish existing payment platforms did better?</label><textarea id="f5" name="wish" rows="3" maxlength="800"></textarea>
+<label class="chk"><input type="checkbox" name="anonymous" checked><span>Submit anonymously</span></label>
+<p class="err" role="alert"></p>
+<button class="btn btn-p btn-l" type="submit"><span class="bt">Send Feedback</span></button>
+<p class="status" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+
+<section class="sec alt" id="faq">
+<div class="wrap narrow">
+<div class="head"><h2>Frequently asked questions</h2></div>
+<div class="faq">
+<details><summary>What is TeenPay?</summary><div><p>TeenPay is an upcoming payment technology platform designed to make payment infrastructure more accessible to young entrepreneurs.</p></div></details>
+<details><summary>Is TeenPay available yet?</summary><div><p>No. TeenPay is under development and does not currently provide payment processing services. Features shown here are planned and illustrative.</p></div></details>
+<details><summary>Who is TeenPay designed for?</summary><div><p>Young entrepreneurs, digital product creators, SaaS builders, online store owners and independent developers.</p></div></details>
+<details><summary>Will TeenPay support UPI?</summary><div><p>UPI QR experiences are planned. Availability will depend on payment-provider partnerships and applicable legal requirements.</p></div></details>
+<details><summary>Will I be able to integrate TeenPay with my website?</summary><div><p>Website and application integrations are a planned focus, subject to the same provider and legal dependencies.</p></div></details>
+<details><summary>Will TeenPay provide APIs and webhooks?</summary><div><p>Yes, APIs and webhooks are planned. The code shown on this page is a conceptual example, not a working API.</p></div></details>
+<details><summary>Can I join the early-access waitlist?</summary><div><p>Yes. Use the waitlist form above. Only your email is required; the other fields are optional.</p></div></details>
+<details><summary>Will TeenPay support users under 18?</summary><div><p>We are exploring compliant onboarding arrangements. Eligibility and guardian requirements will be confirmed before launch.</p></div></details>
+</div>
+</div>
+</section>
+
+<section class="sec final">
+<div class="wrap center">
+<h2>Your next business idea deserves a better starting point.</h2>
+<p>Help us shape the future of accessible payment infrastructure.</p>
+<a class="btn btn-w btn-l" href="#waitlist">Join TeenPay Early Access</a>
+</div>
+</section>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<div class="foot-top"><div><a class="brand" href="#home"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJUZWVuUGF5Ij48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHJ4PSI4IiBmaWxsPSIjMjU2M0VCIi8+PHBhdGggZD0iTTkgMjFsNy0xMCA3IDEwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNTUiLz48Y2lyY2xlIGN4PSI5IiBjeT0iMjEiIHI9IjMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMSIgcj0iMyIgZmlsbD0iI2ZmZiIvPjwvc3ZnPgo=" alt="" width="32" height="32">TeenPay</a><p>Making payment infrastructure more accessible to the next generation.</p></div>
+<nav aria-label="Footer"><a href="#home">Home</a><a href="#features">Features</a><a href="#how">How It Works</a><a href="#waitlist">Early Access</a><a href="#feedback">Feedback</a><a href="#disclaimer">Privacy Policy (coming soon)</a><a href="#disclaimer">Terms of Service (coming soon)</a><a href="#disclaimer">Contact (coming soon)</a></nav></div>
+<p id="disclaimer" class="disc">TeenPay is currently under development. Product features, payment integrations and availability are subject to change. TeenPay does not currently provide payment processing services.</p>
+<p class="disc">© 2026 TeenPay. All rights reserved.</p>
+</div>
+</footer>
+<script>
+(function(){
+'use strict';
+document.documentElement.classList.add('js');
+var nav=document.getElementById('nav'),burger=document.getElementById('burger'),menu=document.getElementById('menu');
+function onScroll(){nav.classList.toggle('scrolled',window.scrollY>10)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+function setMenu(o){menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',String(o))}
+burger.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
+menu.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);burger.focus()}});
+var els=document.querySelectorAll('.fade');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+  els.forEach(function(el,i){el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)});
+}else{els.forEach(function(el){el.classList.add('in')})}
+var ds=document.querySelectorAll('.faq details');
+ds.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)ds.forEach(function(o){if(o!==d)o.open=false})})});
+
+/* BACKEND INTEGRATION PLACEHOLDER: set data-endpoint on each <form> to your API URL
+   (receives JSON via POST). Until configured, nothing is sent or stored and the UI says so.
+   Success is shown only when the server responds with an OK status. */
+var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function collect(form){var o={};new FormData(form).forEach(function(v,k){o[k]=o[k]!==undefined?[].concat(o[k],v):v});return o}
+function wire(form,validate,okMsg){
+  var btn=form.querySelector('button[type=submit]'),label=btn.querySelector('.bt'),status=form.querySelector('.status'),done=false,busy=false,orig=label.textContent;
+  function say(t,c){status.textContent=t;status.className='status '+(c||'')}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(done||busy||!validate(form))return;
+    var ep=form.getAttribute('data-endpoint');
+    if(!ep){say('Submissions aren’t connected yet, so nothing was sent. Please check back soon.','bad');return}
+    busy=true;btn.disabled=true;label.textContent='Submitting…';say('');
+    fetch(ep,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(collect(form))})
+      .then(function(r){if(!r.ok)throw new Error(r.status);done=true;say(okMsg,'ok');label.textContent='Submitted';form.reset()})
+      .catch(function(){btn.disabled=false;label.textContent=orig;say('Something went wrong and your submission was not received. Please try again.','bad')})
+      .then(function(){busy=false});
+  });
+}
+var wf=document.getElementById('waitlist-form'),we=document.getElementById('w-email-err');
+wire(wf,function(f){
+  var i=f.email,ok=EMAIL.test(i.value.trim());
+  i.classList.toggle('invalid',!ok);i.setAttribute('aria-invalid',String(!ok));
+  we.textContent=ok?'':'Please enter a valid email address.';
+  if(!ok)i.focus();return ok;
+},'You’re on the list. Thanks for joining TeenPay early access.');
+wf.email.addEventListener('input',function(){if(EMAIL.test(this.value.trim())){this.classList.remove('invalid');we.textContent=''}});
+var ff=document.getElementById('feedback-form');
+wire(ff,function(f){
+  var any=Array.prototype.some.call(f.elements,function(el){return(el.type==='text'||el.tagName==='TEXTAREA')&&el.value.trim()})||f.querySelector('input[name=features]:checked');
+  f.querySelector('.err').textContent=any?'':'Please answer at least one question.';return !!any;
+},'Thank you. Your feedback was received.');
+})();
+</script>
+<script>
+(function(){
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('[data-count]').forEach(function(el){
+ var t=+el.dataset.count,p=el.dataset.prefix||'',s=el.dataset.suffix||'';
+ if(rm){el.textContent=p+t+s;return}
+ var st=performance.now();(function f(n){var k=Math.min((n-st)/1400,1),e=1-Math.pow(1-k,3);el.textContent=p+Math.round(t*e)+s;if(k<1)requestAnimationFrame(f)})(st)});
+if(rm)return;
+var list=document.getElementById('txs'),items=[['D','Design Kit','₹349'],['E','E-book','₹149'],['F','Pro Template','₹599'],['G','Mentor Call','₹999']],i=0;
+setInterval(function(){
+ var d=items[i++%items.length],li=document.createElement('li');
+ li.innerHTML='<span class="av">'+d[0]+'</span><div><strong>'+d[1]+'</strong><small>'+d[2]+' · sample</small></div><span class="pill wait">Pending</span>';
+ list.insertBefore(li,list.firstChild);
+ setTimeout(function(){var p=li.querySelector('.pill');p.className='pill';p.textContent='Paid — Demo'},1300);
+ if(list.children.length>3)list.removeChild(list.lastChild);
+},3600);
+})();
+</script>
+</body>
+</html>
